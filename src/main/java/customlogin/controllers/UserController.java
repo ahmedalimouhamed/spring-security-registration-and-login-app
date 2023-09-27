@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import customlogin.dto.UserDto;
+import customlogin.model.User;
 import customlogin.services.IUserService;
 
 @Controller
@@ -46,7 +47,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String registerSave(@ModelAttribute("user") UserDto userDto) {
+	public String registerSave(@ModelAttribute("user") UserDto userDto, Model model) {
+		User user = userService.findByUsername(userDto.getUsername());
+		if(user != null) {
+			model.addAttribute("userexists", user);
+			return "register";
+		}
 		userService.save(userDto);
 		return "redirect:/register?success";
 	}

@@ -71,6 +71,7 @@
 	        <form method="post" role="form" th:action="@{/register}" th:object="${user}">
 	            <input th:field="*{fullName}" class="form-input" type="text" placeholder="Full Name" required>
 	            <input th:field="*{username}" class="form-input" type="text" placeholder="Username" required>
+	            <span th:if="${userexists}" style="color:red;">Username Is taken</span>
 	            <input th:field="*{password}" class="form-input" type="password" placeholder="Password" required>
 	            <button class="form-button" type="submit">Register</button>
 	            <span>Already Registered <a th:href="@{/login}">Login</a></span>
