@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1256">
+<title>Register</title>
+<style>
+		*{
+			box-sizing: border-box;
+		}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c299d0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .form-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #5e057e;
+        }
+
+        .form-input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-button {
+            background-color: #5e057e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .success-message {
+            background-color: #5e057e;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+	    <div th:if="${param.success}">
+	    	<div class="success-message">
+		        <strong>Success!</strong> You have successfully registered.
+		    </div>
+	    </div>
+        <h2 class="form-title">Registration</h2>
+        <div>
+	        <form method="post" role="form" th:action="@{/register}" th:object="${user}">
+	            <input th:field="*{fullName}" class="form-input" type="text" placeholder="Full Name" required>
+	            <input th:field="*{username}" class="form-input" type="text" placeholder="Username" required>
+	            <input th:field="*{password}" class="form-input" type="password" placeholder="Password" required>
+	            <button class="form-button" type="submit">Register</button>
+	            <span>Already Registered <a th:href="@{/login}">Login</a></span>
+	        </form>
+        </div>
+    </div>
+</body>
+</html>
